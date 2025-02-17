@@ -18,3 +18,55 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     })
   end,
 })
+
+-- dotnet
+local function find_closest_file(filename)
+  local path = vim.fn.expand("%:p") -- Get full path of the current file
+  local dir = vim.fn.fnamemodify(path, ":h") -- Get directory of the file
+  local stop_point = vim.fn.expand("$HOME") .. "/repo" -- Get user's home directory
+
+  while dir and dir ~= stop_point do
+    local match = vim.fn.globpath(dir, filename, false, true)
+    if #match > 0 then
+      return match[1] -- Return the first match (closest)
+    end
+    dir = vim.fn.fnamemodify(dir, ":h") -- Move up one directory
+  end
+  return nil
+end
+
+local built_projects = {} -- Tracks builds in the session
+
+local function build_dotnet_project()
+  local sln_file = find_closest_file("*.sln")
+  local csproj_file = find_closest_file("*.csproj")
+
+  local target = sln_file or csproj_file
+
+  if target and not built_projects[target] then
+    built_projects[target] = true -- Mark this project as built
+
+    local target_name = vim.fn.fnamemodify(target, ":t")
+    local build_type = sln_file and "solution" or "project" -- Determine type
+    vim.notify("🚀 Building .NET " .. build_type .. "\n   " .. target_name, vim.log.levels.INFO)
+
+    vim.fn.jobstart("dotnet build " .. vim.fn.shellescape(target), {
+      on_exit = function(_, code)
+        if code == 0 then
+          vim.notify("✅ .NET build successful:\n   " .. target_name, vim.log.levels.INFO)
+        else
+          vim.notify("❌ .NET build failed:\n   " .. target_name, vim.log.levels.ERROR)
+        end
+      end,
+      stdout_buffered = true,
+      stderr_buffered = true,
+    })
+  end
+end
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+  pattern = { "*.cs", "*.csproj", "*.sln" },
+  callback = function()
+    build_dotnet_project()
+  end,
+})
