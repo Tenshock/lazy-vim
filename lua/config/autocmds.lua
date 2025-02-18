@@ -44,8 +44,6 @@ local function build_dotnet_project()
   local target = sln_file or csproj_file
 
   if target and not built_projects[target] then
-    built_projects[target] = true -- Mark this project as built
-
     local target_name = vim.fn.fnamemodify(target, ":t")
     local build_type = sln_file and "solution" or "project" -- Determine type
     vim.notify("🚀 Building .NET " .. build_type .. "\n   " .. target_name, vim.log.levels.INFO)
@@ -54,6 +52,18 @@ local function build_dotnet_project()
       on_exit = function(_, code)
         if code == 0 then
           vim.notify("✅ .NET build successful:\n   " .. target_name, vim.log.levels.INFO)
+          built_projects[target] = true -- Mark this project as built
+
+          -- Wait for LSP to initialize before restarting
+          vim.api.nvim_create_autocmd("LspAttach", {
+            once = true, -- Only trigger once
+            callback = function()
+              vim.schedule(function()
+                vim.cmd("LspRestart")
+                vim.notify("🔄 LSP Restarted after Initialization!", vim.log.levels.INFO)
+              end)
+            end,
+          })
         else
           vim.notify("❌ .NET build failed:\n   " .. target_name, vim.log.levels.ERROR)
         end
