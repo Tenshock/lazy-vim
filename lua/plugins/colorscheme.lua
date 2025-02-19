@@ -1,5 +1,4 @@
 return {
-  { "Mofiqul/vscode.nvim" },
   { "marko-cerovac/material.nvim" },
   {
     "LazyVim/LazyVim",
