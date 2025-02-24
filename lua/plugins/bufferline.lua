@@ -1,3 +1,5 @@
+vim.api.nvim_set_hl(0, "BufferLineFill", { bg = "#0f111a" })
+
 return {
   {
     "akinsho/bufferline.nvim",
