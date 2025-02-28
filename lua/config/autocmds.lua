@@ -35,6 +35,7 @@ local function find_closest_file(filename)
   return nil
 end
 
+local projects_being_built = {} -- Tracks projects being built to avoid multiple parallel builds
 local built_projects = {} -- Tracks builds in the session
 
 local function build_dotnet_project()
@@ -43,13 +44,17 @@ local function build_dotnet_project()
 
   local target = sln_file or csproj_file
 
-  if target and not built_projects[target] then
+  if target and not built_projects[target] and not projects_being_built[target] then
+    projects_being_built[target] = true -- Mark this project as being built
+
     local target_name = vim.fn.fnamemodify(target, ":t")
     local build_type = sln_file and "solution" or "project" -- Determine type
     vim.notify("🚀 Building .NET " .. build_type .. "\n   " .. target_name, vim.log.levels.INFO)
 
     vim.fn.jobstart("dotnet build " .. vim.fn.shellescape(target), {
       on_exit = function(_, code)
+        projects_being_built[target] = false -- Mark this project as being built
+
         if code == 0 then
           vim.notify("✅ .NET build successful:\n   " .. target_name, vim.log.levels.INFO)
           built_projects[target] = true -- Mark this project as built
