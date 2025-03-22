@@ -1,5 +1,5 @@
 return {
-  "snacks.nvim",
+  "folke/snacks.nvim",
   opts = {
     dashboard = {
       preset = {
@@ -22,6 +22,11 @@ return {
 ]],
       },
     },
+    explorer = {
+      enabled = false,
+    },
+    image = {},
+    statuscolumn = {},
   },
 }
 -- http://patorjk.com/software/taag
