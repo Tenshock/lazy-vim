@@ -42,7 +42,7 @@ return {
     window = {
       width = "30",
       mappings = {
-        ["p"] = { "toggle_preview", config = { use_float = true } },
+        ["p"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
       },
     },
   },
