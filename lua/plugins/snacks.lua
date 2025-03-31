@@ -26,7 +26,9 @@ return {
       enabled = false,
     },
     image = {},
-    statuscolumn = {},
+    statuscolumn = {
+      enabled = true,
+    },
   },
 }
 -- http://patorjk.com/software/taag
