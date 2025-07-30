@@ -37,6 +37,15 @@ return {
       enabled = false,
     },
     image = {},
+    picker = {
+      sources = {
+        files = { hidden = true },
+        explorer = { hidden = true },
+        grep = { hidden = true },
+        grep_word = { hidden = true },
+        grep_buffers = { hidden = true },
+      },
+    },
     statuscolumn = {
       enabled = true,
     },

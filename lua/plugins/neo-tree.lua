@@ -20,7 +20,6 @@ return {
     filesystem = {
       filtered_items = {
         visible = true,
-        hide_dotfiles = false,
       },
     },
     default_component_configs = {
