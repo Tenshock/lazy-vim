@@ -2,6 +2,7 @@ return {
   "williamboman/mason.nvim",
   opts = {
     ensure_installed = {
+      "gopls",
       "hyprls",
       "json-lsp",
       "lua-language-server",
