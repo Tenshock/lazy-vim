@@ -8,7 +8,7 @@ return {
       "lua-language-server",
       "marksman",
       "nil",
-      "nixpkgs-fmt",
+      "nixfmt",
       "omnisharp",
       "taplo",
       "vtsls",
