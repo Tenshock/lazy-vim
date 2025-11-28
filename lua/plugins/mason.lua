@@ -14,6 +14,6 @@ return {
       "vtsls",
       "yaml-language-server",
     },
-    auto_update = true, -- Automatically update tools
+    auto_update = true,
   },
 }
