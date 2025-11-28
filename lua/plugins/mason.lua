@@ -9,7 +9,7 @@ return {
       "marksman",
       "nil",
       "nixfmt",
-      "omnisharp",
+      -- "omnisharp",
       "taplo",
       "vtsls",
       "yaml-language-server",
