@@ -3,3 +3,6 @@
 -- Add any additional options here
 
 vim.g.snacks_animate = false
+
+-- Always use the git root for project scope (avoids LSP/package roots in monorepos).
+vim.g.root_spec = { ".git" }
