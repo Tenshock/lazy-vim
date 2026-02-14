@@ -10,6 +10,7 @@ return {
       "nil",
       "nixfmt",
       -- "omnisharp",
+      "rust-analyzer",
       "taplo",
       "vtsls",
       "yaml-language-server",
