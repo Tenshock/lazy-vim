@@ -1,4 +1,4 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  opts = { ensure_installed = { "css", "hyprlang" } },
+  opts = { ensure_installed = { "scss", "css", "hyprlang" } },
 }
