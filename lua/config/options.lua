@@ -8,3 +8,5 @@ vim.g.snacks_animate = false
 vim.g.root_spec = { ".git" }
 
 vim.opt.spelllang = { "en", "fr" }
+
+vim.opt.relativenumber = false
