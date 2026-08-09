@@ -1,5 +1,7 @@
 # LazyVim
 
+> ⚠️ Project is abandoned as the full configuration is moved into nix
+
 Custom configuration from [LazyVim](https://github.com/LazyVim/LazyVim) template.
 Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
 
